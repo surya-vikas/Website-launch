@@ -1,96 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Google Style</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Launch</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #003366, #0055aa); /* Blue gradient */
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
 
-<style>
-body {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  background-image: url('background.jpg');
-  background-size: cover;
-  background-position: center;
-  color: white;
-}
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
 
-h1 {
-  font-size: 70px;
-  margin-top: 100px;
-}
+    .logo img {
+      width: 120px;
+      height: auto;
+      margin-bottom: 15px;
+    }
 
-.sb {
-  background: white;
-  border-radius: 30px;
-  padding: 10px;
-  display: inline-block;
-  width: 500px;
-  max-width: 90%;
-}
+    .logo h1 {
+      font-size: 28px;
+      letter-spacing: 2px;
+      font-weight: bold;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
 
-.sb input {
-  font-size: 16px;
-  width: 80%;
-  border: none;
-  outline: none;
-}
+    button {
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background: #ff0000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 10;
+      position: relative;
+    }
 
-.sb i {
-  margin-left: 10px;
-  cursor: pointer;
-  color: gray;
-}
+    button:hover {
+      background: #cc0000;
+      transform: scale(1.05);
+    }
 
-.pf {
-  margin-top: 40px;
-}
-
-.p {
-  display: inline-block;
-  margin: 10px;
-}
-
-.p img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 2px solid white;
-}
-
-.p p {
-  margin: 5px 0 0;
-  font-size: 14px;
-}
-</style>
+    video {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      background: black;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Google</h1>
+  <!-- Logo + Name -->
+  <div class="logo">
+    <img src="logo.png" alt="CSAC Logo">
+    <h1>CSAC Website Launch</h1>
+  </div>
 
-<form class="sb" action="https://www.google.com/search">
-  <input type="text" name="q" placeholder="Search Google or type a URL">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <i class="fa-solid fa-microphone"></i>
-</form>
+  <!-- Launch Button -->
+  <button id="launchBtn">Launch</button>
 
-<div class="pf">
-  <div class="p">
-    <img src="logo.jpg">
-    <p>Logo</p>
-  </div>
-  <div class="p">
-    <img src="logo.jpg">
-    <p>Logo</p>
-  </div>
-  <div class="p">
-    <img src="logo.jpg">
-    <p>Logo</p>
-  </div>
-  <div class="p">
-    <img src="logo.jpg">
-    <p>Logo</p>
-  </div>
-</div>
+  <!-- Video (with song already attached) -->
+  <video id="introVideo" src="video.mp4" playsinline></video>
+
+  <script>
+    const button = document.getElementById("launchBtn");
+    const video = document.getElementById("introVideo");
+    const logo = document.querySelector(".logo");
+
+    button.addEventListener("click", async () => {
+      button.style.display = "none";
+      logo.style.display = "none"; // Hide logo
+      video.style.display = "block";
+
+      // Play video (with embedded audio)
+      video.play();
+
+      // Disable right-click
+      video.addEventListener("contextmenu", e => e.preventDefault());
+
+      // When video ends -> redirect
+      video.onended = () => {
+        window.location.href = "https://youtube.com";
+      };
+    });
+  </script>
 
 </body>
 </html>
