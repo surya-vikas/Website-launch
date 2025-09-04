@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Launch</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #003366, #0055aa); /* Blue gradient */
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .logo img {
+      width: 120px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .logo h1 {
+      font-size: 28px;
+      letter-spacing: 2px;
+      font-weight: bold;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background: #ff0000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 10;
+      position: relative;
+    }
+
+    button:hover {
+      background: #cc0000;
+      transform: scale(1.05);
+    }
+
+    video {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo + Name -->
+  <div class="logo">
+    <img src="logo.png" alt="CSAC Logo">
+    <h1>CSAC Website Launch</h1>
+  </div>
+
+  <!-- Launch Button -->
+  <button id="launchBtn">Launch</button>
+
+  <!-- Video (with song already attached) -->
+  <video id="introVideo" src="video.mp4" playsinline></video>
+
+  <script>
+    const button = document.getElementById("launchBtn");
+    const video = document.getElementById("introVideo");
+    const logo = document.querySelector(".logo");
+
+    button.addEventListener("click", async () => {
+      button.style.display = "none";
+      logo.style.display = "none"; // Hide logo
+      video.style.display = "block";
+
+      // Play video (with embedded audio)
+      video.play();
+
+      // Disable right-click
+      video.addEventListener("contextmenu", e => e.preventDefault());
+
+      // When video ends -> redirect
+      video.onended = () => {
+        window.location.href = "https://youtube.com";
+      };
+    });
+  </script>
+
+</body>
+</html>
